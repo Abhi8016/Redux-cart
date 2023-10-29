@@ -8,7 +8,7 @@ const Products = () => {
     const dispatch = useDispatch();
     const { data: products, status } = useSelector((state) => state.product);
     const [total, setTotal] = useState(0);
-    // const [products, setProducts] = useState([]);
+    
 
     useEffect(() => {
         dispatch(fetchProducts());
