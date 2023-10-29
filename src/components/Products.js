@@ -20,7 +20,7 @@ const Products = () => {
         // };
         // fetchProducts();
     }, []);
-
+//
     const handleAdd = (product) => {
         dispatch(add(product));
         sum = sum + product.price;
