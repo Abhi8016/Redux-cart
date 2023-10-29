@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { add } from '../store/cartSlice';
 import { fetchProducts } from '../store/productSlice';
 import { STATUSES } from '../store/productSlice';
-
+let sum = 0;
 const Products = () => {
     const dispatch = useDispatch();
     const { data: products, status } = useSelector((state) => state.product);
+    const [total, setTotal] = useState(0);
     // const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -22,6 +23,8 @@ const Products = () => {
 
     const handleAdd = (product) => {
         dispatch(add(product));
+        sum = sum + product.price;
+        setTotal(sum)
     };
 
     if (status === STATUSES.LOADING) {
@@ -32,19 +35,25 @@ const Products = () => {
         return <h2>Something went wrong!</h2>;
     }
     return (
-        <div className="productsWrapper">
-            {products.map((product) => (
-                <div className="card" key={product.id}>
-                    <img src={product.image} alt="" />
-                    <h4>{product.title}</h4>
-                    <h5>{product.price}</h5>
-                    <button onClick={() => handleAdd(product)} className="btn">
-                        Add to cart
-                    </button>
-                </div>
-            ))}
-        </div>
+        <>
+            <h3>Total Price : {total}</h3>
+            <div className="productsWrapper">
+
+                {products.map((product) => (
+
+                    <div className="card" key={product.id}>
+                        <img src={product.image} alt="" />
+                        <h4>{product.title}</h4>
+                        <h5>{product.price}</h5>
+                        <button onClick={() => handleAdd(product)} className="btn">
+                            Add to cart
+                        </button>
+                    </div>
+                ))}
+            </div>
+        </>
     );
 };
+
 
 export default Products;

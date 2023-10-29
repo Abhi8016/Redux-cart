@@ -1,4 +1,3 @@
-import { getNodeText } from '@testing-library/react';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { remove } from '../store/cartSlice';
@@ -13,6 +12,7 @@ const Cart = () => {
     return (
         <div>
             <h3>Cart</h3>
+            {/* <h3>Total Price: </h3> */}
             <div className="cartWrapper">
                 {products.map((product) => (
                     <div key={product.id} className="cartCard">
